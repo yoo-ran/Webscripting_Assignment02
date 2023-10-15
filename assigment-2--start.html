@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>MDIA 2294</title>
+	
+	<style>	    
+	    img {
+	        margin:5px;
+	    }
+	    
+	    img.clickable{
+	        cursor:pointer;
+	    }
+	
+	</style>
+	
+</head>
+<body>
+
+	<h1>MDIA 2294: Assignment 2</h1>
+	
+	<div style="text-align:center;">
+	    <table>
+	        <tr>
+	            <td></td>
+	            <td style="text-align:center;">
+                    <div><img id="main-image" alt="Main Image" /></div>
+
+                    <!-- you may or may not use this hidden textbox-->
+                    <div><input id="current-index" /></div>    
+                </td>
+	            <td></td>
+	        
+	        </tr>
+	        <tr>
+	            <td>
+	                <img src="images/first.png" id="first-btn" />            
+	                <img src="images/prev.png" id="prev-btn" />
+	            </td>
+	            <td>
+	                <div id="thumbnail-area"></div>	        
+	            </td>
+	            <td>
+	                <img src="images/next.png" id="next-btn" />            
+	                <img src="images/last.png" id="prev-btn" />
+	            </td>
+	        </tr>	    
+	    </table>       
+	</div>
+    
+	<script>
+
+		const first_load = () => { 
+			// TODO: set the main image to the first image in the array (index 0)
+			// TODO: set the thumbnail images		
+		}
+	
+		const set_main_image = (index) => {
+			// TODO: set the main-image src image based on the passed parameter	    
+	
+			// TODO: set the hidden textbox to the current index (if you take this approach)	    
+	
+			// update the thumbnails based on the current selection
+			update_thumbnails(index);
+		}
+	
+		const set_thumbnails = () => {
+			// TODO: declare a variable for the thumbnail strip html (optional)
+	
+			// TODO: loop through the global array and build the html
+			//       - add an onclick handler to each thumbnail to call set_main_image(index)
+	
+			// TODO: add the html to the divThumbArea
+	
+		} 
+	
+		const update_thumbnails = (current_index) => {
+			// TODO: you'll need to loop through all thumbnails
+			//		- turn on an indicator (eg opacity:1.0) if it's the selected thumb
+			//		- turn off the indicator (eg opacity:0.75) if it's not
+		} 
+	
+		const set_nav_first = () => {
+			// TODO: navigate to the first image (this is the easy one since it's always index zero)
+			
+		}
+	
+		const set_nav_last = () => {
+			// TODO: navigate to the last image (should work for any size array)
+		}
+	
+		const set_nav_next = () => {
+			// TODO: move to the next image, unless at the end in which case show the first image
+			
+		}
+	
+		const set_nav_prev = () => {
+			// TODO: move to the previous image, unless at the end in which case show the last image
+		}	
+	
+		window.addEventListener("load", first_load);
+
+	S</script>
+	
+</body>
+</html>
