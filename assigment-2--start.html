@@ -11,9 +11,25 @@
 	        margin:5px;
 	    }
 	    
+		#main-image {
+			width: 40%;
+		}
 	    img.clickable{
 	        cursor:pointer;
 	    }
+		
+		#thumbnail-area{
+			display: flex;
+			justify-content: center;
+		}
+
+		#thumbnail-area img {
+			width: 75px;
+			height: 75px;
+			object-fit: cover;
+		}
+
+
 	
 	</style>
 	
@@ -28,85 +44,89 @@
 	            <td></td>
 	            <td style="text-align:center;">
                     <div><img id="main-image" alt="Main Image" /></div>
-
-                    <!-- you may or may not use this hidden textbox-->
-                    <div><input id="current-index" /></div>    
                 </td>
 	            <td></td>
 	        
 	        </tr>
 	        <tr>
 	            <td>
-	                <img src="images/first.png" id="first-btn" />            
-	                <img src="images/prev.png" id="prev-btn" />
+	                <img src="images/first.png" id="first-btn" onclick='set_nav_first()'/>            
+	                <img src="images/prev.png" id="prev-btn"  onclick='set_nav_prev()' />
 	            </td>
 	            <td>
 	                <div id="thumbnail-area"></div>	        
 	            </td>
 	            <td>
-	                <img src="images/next.png" id="next-btn" />            
-	                <img src="images/last.png" id="prev-btn" />
+	                <img src="images/next.png" id="next-btn" onclick='set_nav_next()' />            
+	                <img src="images/last.png" id="prev-btn"onclick="set_nav_last()" />
 	            </td>
 	        </tr>	    
 	    </table>       
 	</div>
     
 	<script>
+		const image_arr = ["image01.jpg","image02.jpg","image03.jpg"]
+		let current_index = 0;
 
 		const first_load = () => { 
 			// TODO: set the main image to the first image in the array (index 0)
 			// TODO: set the thumbnail images
-			array.forEach(element => {
-				
+
+			document.querySelector("#main-image").src = `images/${image_arr[0]}`
+			image_arr.forEach((img,index) => {
+				let img_tag = document.createElement("img")
+				img_tag.src = `images/${img}`
+				let thumbnail_image = document.querySelector("#thumbnail-area")
+				thumbnail_image.append(img_tag)
+				thumbnail_image.addEventListener("click", set_thumbnails)
 			});		
 		}
 	
 		const set_main_image = (index) => {
 			// TODO: set the main-image src image based on the passed parameter	    
-	
-			// TODO: set the hidden textbox to the current index (if you take this approach)	    
-	
+			
 			// update the thumbnails based on the current selection
-			update_thumbnails(index);
+			current_index = index
+			document.querySelector("#main-image").src = `images/${image_arr[current_index]}`
 		}
 	
 		const set_thumbnails = () => {
 			// TODO: declare a variable for the thumbnail strip html (optional)
-	
+			
 			// TODO: loop through the global array and build the html
 			//       - add an onclick handler to each thumbnail to call set_main_image(index)
-	
+			
 			// TODO: add the html to the divThumbArea
-	
-		} 
-	
-		const update_thumbnails = (current_index) => {
-			// TODO: you'll need to loop through all thumbnails
-			//		- turn on an indicator (eg opacity:1.0) if it's the selected thumb
-			//		- turn off the indicator (eg opacity:0.75) if it's not
+
+			console.log(this);
 		} 
 	
 		const set_nav_first = () => {
 			// TODO: navigate to the first image (this is the easy one since it's always index zero)
-			
+			current_index = 0
+			set_main_image(current_index)
 		}
 	
 		const set_nav_last = () => {
 			// TODO: navigate to the last image (should work for any size array)
+			current_index = image_arr.length -1
+			set_main_image(current_index)
 		}
 	
 		const set_nav_next = () => {
-			// TODO: move to the next image, unless at the end in which case show the first image
-			
+			current_index = (current_index >= image_arr.length -1)? current_index=0: current_index+1;
+			set_main_image(current_index)
 		}
 	
 		const set_nav_prev = () => {
 			// TODO: move to the previous image, unless at the end in which case show the last image
+			current_index = (current_index <=0)? image_arr.length -1: current_index-1;
+			set_main_image(current_index)
 		}	
 	
 		window.addEventListener("load", first_load);
 
-	S</script>
+	</script>
 	
 </body>
 </html>
