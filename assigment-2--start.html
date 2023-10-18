@@ -3,11 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name='author' content='YooranKim'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src='./script.js'></script>
 	<title>MDIA 2294</title>
 
 	
 	<style>	    
+
+		body{
+			background-color: blanchedalmond;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
 	    img {
 	        margin:5px;
 	    }
@@ -15,9 +25,6 @@
 		#main-image {
 			width: 40%;
 		}
-	    img.clickable{
-	        cursor:pointer;
-	    }
 		
 		#thumbnail-area{
 			display: flex;
@@ -25,11 +32,59 @@
 		}
 
 		#thumbnail-area img {
-			width: 75px;
-			height: 75px;
+			width: 90px;
+			height: 90px;
 			object-fit: cover;
 		}
 
+		.button {
+			display: flex;
+			align-items: center;
+			column-gap: 2vh;
+		}
+
+		tr {
+			display: flex;
+			justify-content: center;
+			column-gap: 4vh;
+		}
+
+		p {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			
+			border-radius: 50%;
+			width: 60px;
+			height: 60px;
+			border: 5px solid saddlebrown;
+
+			cursor: pointer;
+		}
+
+		i{
+			color:saddlebrown ;
+			font-size:40px;
+		}
+
+		p:hover{
+			background-color: saddlebrown;
+		}
+		
+		p:hover i {
+			color: blanchedalmond;
+		}
+
+		.thumbnails{
+			cursor: pointer;
+			opacity: 0.5;
+
+		}
+
+		.thumbnails:hover{
+			opacity: 1;
+		}
 
 	
 	</style>
@@ -50,16 +105,17 @@
 	        
 	        </tr>
 	        <tr>
-	            <td>
-	                <img src="images/first.png" id="first-btn" onclick='set_nav_first()'/>            
-	                <img src="images/prev.png" id="prev-btn"  onclick='set_nav_prev()' />
+	            <td class='button'>
+					<p><i class="fa-solid fa-angles-left" id="first-btn" onclick='set_nav_first()'></i></p>
+					<p><i class="fa-solid fa-angle-left" id="prev-btn" onclick='set_nav_prev()'></i></p>
 	            </td>
 	            <td>
 	                <div id="thumbnail-area"></div>	        
 	            </td>
-	            <td>
-	                <img src="images/next.png" id="next-btn" onclick='set_nav_next()' />            
-	                <img src="images/last.png" id="prev-btn"onclick="set_nav_last()" />
+	            <td class='button'>
+					<p><i class="fa-solid fa-angle-right" id='next-btn' onclick='set_nav_next()'></i></p>
+					<p><i class="fa-solid fa-angles-right" id="prev-btn"onclick="set_nav_last()"></i></p>
+					
 	            </td>
 	        </tr>	    
 	    </table>       

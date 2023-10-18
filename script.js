@@ -1,14 +1,14 @@
     // 
-    const image_arr = ["image01.jpg","image02.jpg","image03.jpg"]
+    const image_arr = ["image01.jpg","image02.jpg","image03.jpg","image04.jpg","image05.jpg"]
 	let current_index = 0;
-
+    let thumbnail_opacity = false;
 
 		const first_load = () => { 
 			// TODO: set the main image to the first image in the array (index 0)
 			// TODO: set the thumbnail images
 
 			document.querySelector("#main-image").src = `images/${image_arr[0]}`
-			image_arr.forEach((img,index) => {
+			image_arr.forEach((img) => {
 				let img_tag = document.createElement("img")
 				img_tag.src = `images/${img}`
                 img_tag.className = "thumbnails"
@@ -20,6 +20,12 @@
             for(let i=0; i<images.length; i++){
                 images[i].addEventListener("click",()=>{
                     set_main_image(i)
+                    if(thumbnail_opacity){
+                        images[i].style.opacity = "0.5"
+                        thumbnail_opacity=true;
+                    }else{
+                        images[i].style.opacity = "1"
+                    }
                 })
             }
 		}
