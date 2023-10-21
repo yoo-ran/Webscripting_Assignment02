@@ -66,31 +66,57 @@
 			// i starts from 0 until before the length of img_tag_arr, and i will be increment one by one
 			// in this case, i will be increased like  0,1,2,3,4
             for(let i=0; i<img_tag_arr.length; i++){
-				// when user clicked each thumbnail img, some fuctions will work
+				// whenever user clicked each thumbnail img, some fuctions will work
+				// to set main image and change thumbnail image
                 img_tag_arr[i].addEventListener("click",()=>{
+					// when user click the thumbnail img
+					// function set_main_image() will get i(index of image that user clicked) as a parameter
                     set_main_image(i)
+					// function set_thumbnail() will get i as a parameter and the array of thumnail img tags
 					set_thumbnail(i, img_tag_arr)
                 })
-				
             }
 		}
 	
+		// function set_main_image
+		// to change main image
+		// the function got index from line 74 in fuction first_load()
 		const set_main_image = (index) => {
-			current_index = index
+			// the global variable, current_index store the vaue of index(parameter)
+			// which is array index of thumbnail img that user clicked now
+			current_index = index;
+			// Now time to change the main image
+			// select main image tag
+			// 	call DOM(document), select the img(img#main-image)
+			//  assign src to the img tag using .src
+			//  image file path will be `images/${image_file_arr[current_index]}`
+			// in the image file path, current_index is used to pick the image that user clicked
 			document.querySelector("#main-image").src = `images/${image_file_arr[current_index]}`
 		}
 
+		// Funtion for changing thumbnail
+		// functionset_thumbnail() got index number and array from function first_load()
+		// index number is the number of thumbnail img tag array
+		// arr is thumbnail img tag array
 		const set_thumbnail = (index, arr) =>{
+			// using for loop, I can access to each thumnail image
 			for(let i=0; i<arr.length; i++){
+				// amongst img tags in arr, if the img tag in arr is equal to img tag of arr[index]
+				// then the img tag in arr is clicked by user
+				// in that case, the opacity of image is 100%(=1)
 				if (arr[i]==arr[index]) {
 					arr[i].style.opacity ="1"
+				// if the img tag in arr[i] is not equal to img tag of arr[index],
+				//  it means user didn't click it
+				//  so the images's opacity should be less that 100%
+				// that's why I gave opacity as 50%(0.5)
 				}else{
 					arr[i].style.opacity ="0.5"
 				}
 			}
 		}
 
-	
+		// When user clik
 		const set_nav_first = () => {
 			// TODO: navigate to the first image (this is the easy one since it's always index zero)
 			current_index = 0
