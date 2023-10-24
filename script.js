@@ -1,5 +1,4 @@
-    // a comment block with your name, student no and the assignment name
-	// Yooran Kim, A01377771, MDIA 2294: Assignment 2
+	// Yooran Kim, A01377771, MDIA 2294: Assignment02
 
 	// Make constant variable to store the file's name of all images
 	// I stored the file's name in array, so I can call each file, easiy using index
