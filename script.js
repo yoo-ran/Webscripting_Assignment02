@@ -27,21 +27,21 @@
 				// CREATE THUMBNAIL
 				// Create img tag using createElement(), since in HTML, there are no img tag in div#Thumbnail-area
 				// img_tag is new img tag
-				// |	<img></img>
+					// <img></img>
 				let img_tag = document.createElement("img")
 				// Assign src to the img tag
 				// ${img} is the element of array image_file_arr, which is file name
-				// |	<img src="images/image01.jpg"></img> ...
+					//<img src="images/image01.jpg"></img> ...
 				img_tag.src = `images/${img}`
 				// later I need img tag array to access each tag
 				// to do that I will use qeurySelectotAll()
 				// so I am giving class to the img tag so that I can select this img tag exactly
-				// |	<img src="images/image01.jpg" class="thumbnails"></img> ...
+					// <img src="images/image01.jpg" class="thumbnails"></img> ...
                 img_tag.className = "thumbnails"
 				// Since the thumbnails are low opacity when window is loaded, I gave the img opacity
 				// It's like a CSS
 				// select element(img_tag), give style(.style), which is opacity(.opacity)
-				// |	<img src="images/image01.jpg" class="thumbnails" style="opacity:0.5"></img> ...
+					// <img src="images/image01.jpg" class="thumbnails" style="opacity:0.5"></img> ...
 				img_tag.style.opacity = "0.5"
 				// Now I am putting all the img tags in the div#thumbnail-area
 				// first, create variable to store div#thumbnail-area
@@ -49,12 +49,12 @@
 				let thumbnail_image = document.querySelector("#thumbnail-area")
 				// in div#thumbnail-area, add all img tags that I've created above
 				// using append() method, it inserts img tags at the end of div#thumbnail-area
-				// <div id="thumbnail-area">
-				// 		<img src="images/image01.jpg" class="thumbnails" style="opacity:0.5"></img>
-				// 		<img src="images/image02.jpg" class="thumbnails" style="opacity:0.5"></img>
-				// 		...
-				// 		<img src="images/image05.jpg" class="thumbnails" style="opacity:0.5"></img>
-				// </div>	   
+					// <div id="thumbnail-area">
+					// 		<img src="images/image01.jpg" class="thumbnails" style="opacity:0.5"></img>
+					// 		<img src="images/image02.jpg" class="thumbnails" style="opacity:0.5"></img>
+					// 		...
+					// 		<img src="images/image05.jpg" class="thumbnails" style="opacity:0.5"></img>
+					// </div>	   
 				thumbnail_image.append(img_tag)
 			});	
 			// Now, I need to access all the img tag, to set main image and change the thumbnails
@@ -116,32 +116,63 @@
 			}
 		}
 
-		// When user clik
+		// When user click this button, first image will appear on main image, first image thumbnail will be 100% opacity
 		const set_nav_first = () => {
-			// TODO: navigate to the first image (this is the easy one since it's always index zero)
-			current_index = 0
+			// since the first image index is 0 in array, we need to set current_index as 0
+			current_index = 0;
+			// to show first image on main image,
+			// using function set_main_image(), put currrent_index in to parameter, then 0 will be value of parameter
+			// and it shows first image on main image
 			set_main_image(current_index)
+			// Change thumbnail
+			// in parameter, put current_index, and img_tag_arr
+			// so I can reach to each img html tag and especially first one.
+			// img_tag_arr is set on line 63, when I set the thumbstrip
 			set_thumbnail(current_index, img_tag_arr)
 		}
 	
+		// When user click this button, last image will appear on main image, then the last thumbnail image will be 100% opacity
 		const set_nav_last = () => {
-			current_index = image_file_arr.length -1
-			set_main_image(current_index)
-			set_thumbnail(current_index, img_tag_arr)
+			// in terms of reusability, I used .length, 
+			// 		cuz whatever we use different array, we don't need to count how many elements are in the array
+			// .length can count how many elements are in the array, so count a number of elements first
+			// last image index is a number of elements - 1, since the index starts from 0
+			//  that's why I subtract 1 from image_file_arr.length
+			current_index = image_file_arr.length - 1;
+			// put new current_index in to function set_main_image()
+			// so the main image can show the last image
+			set_main_image(current_index);
+			// also put current_inedx which means last one, and array
+			// so the fucntion can know which thumbnail should be 100% opacity
+			set_thumbnail(current_index, img_tag_arr);
 		}
 	
+		// When user click this button, next image will appear on main image, then the next thumbnail image will have 100% opacity
 		const set_nav_next = () => {
+			// the next image index is current image index + 1, cuz it is next one
+			// but the thing is when the next image reaches to last image, and when user click next button again, 
+			// the next image should be the first image.
+			//  to make it possible to do it, we need either if condition or ternary operator
+
+			// if the current_index is bigger than last image index which means current_index reached to last image, it should become 0 which means first image index, to go to first image
+			// if not, it means it didn't reach to last image yet, so it can go next. then, current_index becomes current_index + 1
 			current_index = (current_index >= image_file_arr.length -1)? current_index=0: current_index+1;
 			set_main_image(current_index)
 			set_thumbnail(current_index, img_tag_arr)
-
-
 		}
-	
+
+		// When user click this button, previous image will appear on main image, then the previous thumbnail image will have 100% opacity
 		const set_nav_prev = () => {
+			// when user click previous button, the current_index will become current_index-1, 
+			// because the previous image index is before the current image index
+			// however, when the current image reached to first one, the previous image should be last image
+			// using ternary, if current_index is less than 0, meaning that it was already first image
+			// the current_index should be last image index which is image_file_arr.length -1 ( a number of elements of array - 1)
+			// if not, current_index becomes current_index-1 which means previous image
 			current_index = (current_index <=0)? image_file_arr.length -1: current_index-1;
 			set_main_image(current_index);
 			set_thumbnail(current_index, img_tag_arr)
 		}	
 	
+		// when the window is loaded, function first_load() will work;
 		window.addEventListener("load", first_load);
