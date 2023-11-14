@@ -68,6 +68,7 @@
 				// whenever user clicked each thumbnail img, some fuctions will work
 				// to set main image and change thumbnail image
                 img_tag_arr[i].addEventListener("click",()=>{
+					current_index=i;
 					// when user click the thumbnail img
 					// function set_main_image() will get i(index of image that user clicked) as a parameter
                     set_main_image(i)
@@ -83,7 +84,7 @@
 		const set_main_image = (index) => {
 			// the global variable, current_index store the vaue of index(parameter)
 			// which is array index of thumbnail img that user clicked now
-			current_index = index;
+			// current_index = index;
 			// Now time to change the main image
 			// select main image tag
 			// 	call DOM(document), select the img(img#main-image)
