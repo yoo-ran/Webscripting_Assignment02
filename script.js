@@ -175,4 +175,5 @@
 		}	
 	
 		// when the window is loaded, function first_load() will work;
+		// 
 		window.addEventListener("load", first_load);
